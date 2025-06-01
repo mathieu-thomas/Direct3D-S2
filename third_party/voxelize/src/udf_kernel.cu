@@ -20,7 +20,7 @@ __device__ Point3D cross(const Point3D& v1, const Point3D& v2) {
 
 // Compute the dot product of two vectors
 __device__ float dot(const Point3D& v1, const Point3D& v2) {
- return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
 
 // Subtract two 3D points (vector subtraction)
@@ -179,12 +179,12 @@ __device__ void updateUDF(Triangle t, int* udf, const int DIM, const float thres
                 Point3D queryPoint = {(float)i/(DIM-1) - 0.5, (float)j/(DIM-1) - 0.5, (float)k/(DIM-1) -0.5};
                 float distance = pointToTriangleDistance(queryPoint, t.v0, t.v1, t.v2);
                 float distance2 = pointToTriangleDistance(queryPoint, t.v0, t.v1, t.v2, true);
-            if (distance < threshold / DIM || distance2 < threshold / DIM){
-		//distance = distance2;
-		     int int_dist = (int)(distance * 10000000);
-                     atomicMin(&udf[idx], int_dist);
-		}
-	    }
+                if (distance < threshold / DIM || distance2 < threshold / DIM){
+                //distance = distance2;
+                    int int_dist = (int)(distance * 10000000);
+                    atomicMin(&udf[idx], int_dist);
+                }
+            }
     
         }
     }
