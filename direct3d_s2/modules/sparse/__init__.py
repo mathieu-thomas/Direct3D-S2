@@ -19,6 +19,16 @@ def __from_env():
 
     if env_sparse_backend is not None and env_sparse_backend in ['spconv', 'torchsparse']:
         BACKEND = env_sparse_backend
+    else:
+        import platform
+        import importlib
+        if platform.system() == 'Windows':
+            BACKEND = 'spconv'
+        else:
+            try:
+                importlib.import_module('torchsparse')
+            except Exception:
+                BACKEND = 'spconv'
     if env_sparse_debug is not None:
         DEBUG = env_sparse_debug == '1'
     if env_sparse_attn is not None and env_sparse_attn in ['xformers', 'flash_attn']:

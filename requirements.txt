@@ -13,5 +13,6 @@ pymeshfix
 utils3d
 pyvista
 igraph
-git+https://github.com/mit-han-lab/torchsparse.git
+git+https://github.com/mit-han-lab/torchsparse.git  # Linux only
+spconv-cu121; platform_system == "Windows"  # default backend on Windows
 third_party/voxelize/

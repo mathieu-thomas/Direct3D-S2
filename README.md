@@ -54,6 +54,19 @@ pip install -e .
 
 ```
 
+### Windows Setup
+
+TorchSparse does not provide official Windows builds. The code now
+automatically falls back to the `spconv` backend on Windows or when
+TorchSparse is unavailable. Install the appropriate `spconv` wheel:
+
+```bash
+pip install spconv-cu121  # choose the wheel matching your CUDA version
+```
+
+If you wish to override the backend manually you can still set the
+`SPARSE_BACKEND` environment variable.
+
 ### Usage
 
 ```python
